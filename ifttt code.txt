@@ -1,0 +1,30 @@
+int photosensor = A5;
+
+
+
+int analogvalue; 
+
+
+void setup() {
+
+    Serial.begin();
+    pinMode(photosensor, INPUT);
+
+    Particle.variable("analogvalue", analogvalue);
+    
+}
+
+void loop() {
+
+
+    analogvalue = analogRead(photosensor);
+    String str_analogvalue_high = String(analogvalue);
+    String str_analogvalue_low = String(analogvalue);
+    
+    Particle.publish("sun_light_level" , String(analogvalue) ,PRIVATE);
+   
+
+    
+
+    delay(5000);
+}
